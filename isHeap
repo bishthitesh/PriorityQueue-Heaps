@@ -1,0 +1,60 @@
+/*
+Suppose that you are given an array. Write a program to check whether the array is a representation of a binary max-heap or not.
+
+Input: 
+
+    The first line gives the number of elements (n) in the array
+    From the second line, n numbers are entered, which represent the n elements of the array.
+
+Output:
+
+    It returns YES if the given array represents a binary max-heap.
+    It returns NO if the given array does not represent a binary max-heap.
+    */
+
+import java.util.Arrays;
+import java.io.*;
+import java.util.*;
+import java.util.Scanner;
+class Source{
+
+    public static int leftchild(int i) {
+        return (2*i+1);
+    }
+
+    public static int rightchild(int i) {
+        return (2*i+2);
+    }
+
+    public static boolean  isHeap(int[] arr,  int n){
+        //Write your code here
+        //Check if the array element is less than it's child element in the array,
+        //and if they are less return false else return true
+        for (int i = n / 2 - 1; i >= 0; i--){
+            int l = leftchild(i);
+            int r = rightchild(i);
+            if ((l < n && arr[l] > arr[i])||(r < n && arr[r] > arr[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static int[] getArrayInput(int size, Scanner scanner) {
+        int array[] = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = scanner.nextInt();
+        }
+        return array;
+    }
+
+    public static void main (String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int sizeArray1 = scanner.nextInt();
+        int arr[] = getArrayInput(sizeArray1, scanner);
+        int n = arr.length;
+        String x = isHeap(arr, n)? "YES": "NO";
+
+        System.out.println(x);
+    }
+
+}
